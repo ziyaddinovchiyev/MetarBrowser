@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+import androidx.paging.PagedList;
 
 import com.cinemo.metarbrowser.db.entity.Info;
 import com.cinemo.metarbrowser.repository.InfoRepository;
@@ -22,6 +23,10 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<List<Info>> getFiltered() {
         return Transformations.switchMap(filterTerm, term -> repository.fetchDataFiltered(term));
+    }
+
+    public LiveData<PagedList<Info>> getFilteredPaged() {
+        return Transformations.switchMap(filterTerm, term -> repository.fetchDataFilteredPaged(term));
     }
 
     public void setFilterTerm(String filterTerm) {

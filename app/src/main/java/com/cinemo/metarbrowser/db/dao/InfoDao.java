@@ -1,6 +1,7 @@
 package com.cinemo.metarbrowser.db.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -25,4 +26,7 @@ public interface InfoDao {
 
     @Query("SELECT * FROM metar WHERE id LIKE '%' || :term  || '%'")
     LiveData<List<Info>> getAllInfoFiltered(String term);
+
+    @Query("SELECT * FROM metar WHERE id LIKE '%' || :term  || '%'")
+    DataSource.Factory<Integer, Info> getAllInfoFilteredPaged(String term);
 }

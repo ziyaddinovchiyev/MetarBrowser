@@ -16,7 +16,9 @@ import android.widget.TextView;
 
 import com.cinemo.metarbrowser.MetarApp;
 import com.cinemo.metarbrowser.adapter.InfoListAdapter;
+import com.cinemo.metarbrowser.adapter.InfoListAdapterPaged;
 import com.cinemo.metarbrowser.db.entity.Info;
+import com.cinemo.metarbrowser.util.DiffCallbackItem;
 import com.cinemo.metarbrowser.util.ViewModelFactory;
 import com.cinemo.metarbrowser.R;
 import com.cinemo.metarbrowser.util.ClickListener;
@@ -26,10 +28,12 @@ import com.cinemo.metarbrowser.vm.MainViewModel;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, ClickListener {
+public class MainActivity extends AppCompatActivity implements
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        ClickListener {
 
     private TextView placeHolder;
-    private InfoListAdapter adapter;
+    private InfoListAdapterPaged adapter;
     private MainViewModel viewModel;
     private SwipeRefreshLayout swipeRefresh;
     private TextView lastUpdatedAt;
@@ -45,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void subscribe() {
-        viewModel.getFiltered().observe(this, data -> {
+        viewModel.getFilteredPaged().observe(this, data -> {
             if (data.size() == 1) data.get(0).isExpanded = true;
             if (data.size() == 0) placeHolder.setVisibility(View.VISIBLE);
             else placeHolder.setVisibility(View.GONE);
-            adapter.update(data);
+            adapter.submitList(data);
         });
 
         viewModel.setLastUpdatedAtLiveData(sharedPreferences.getString("lastUpdatedAt", "unknown"));
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         EditText input = findViewById(R.id.input);
         RecyclerView infoList = findViewById(R.id.infoList);
         infoList.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InfoListAdapter(this);
+        adapter = new InfoListAdapterPaged(new DiffCallbackItem(), this);
         infoList.setAdapter(adapter);
 
         input.addTextChangedListener(new TextWatcher() {
