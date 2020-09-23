@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Metar Browser</string>
+    <string name="placeholder">Please wait...\nData is loading or\n there is no matching entry for your search</string>
+</resources>

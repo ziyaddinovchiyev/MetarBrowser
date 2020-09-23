@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:contentPadding="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackgroundBorderless">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="EDQA"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/forceUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:tooltipText="Force update"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_update_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/id"
+            app:layout_constraintBottom_toBottomOf="@id/id" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:text="2020"
+            app:layout_constraintRight_toLeftOf="@id/forceUpdate"
+            app:layout_constraintTop_toTopOf="@id/id"
+            app:layout_constraintBottom_toBottomOf="@id/id"/>
+
+        <TextView
+            android:id="@+id/raw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="lorem ipsum"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/arrow"
+            app:layout_constraintTop_toBottomOf="@id/id"/>
+
+        <TextView
+            android:id="@+id/decode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:padding="8dp"
+            android:text="lorem ipsum"
+            android:fontFamily="monospace"
+            android:textColor="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/raw"/>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_down"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
