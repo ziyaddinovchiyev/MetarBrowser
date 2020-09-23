@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cinemo.metarbrowser.MetarApp;
 import com.cinemo.metarbrowser.R;
 import com.cinemo.metarbrowser.db.entity.Info;
 import com.cinemo.metarbrowser.util.ClickListener;
@@ -57,7 +58,10 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.ViewHo
                 holder.arrow.setImageResource(R.drawable.ic_down);
                 data.isExpanded = false;
             }
-            notifyItemChanged(position);
+            MetarApp.get().getExecutors().diskIO().execute(() -> {
+                MetarApp.get().getInfoDao().updateInfo(data);
+                MetarApp.get().getExecutors().mainThread().execute(() -> notifyItemChanged(position));
+            });
         });
 
         holder.forceUpdate.setOnClickListener(view -> {

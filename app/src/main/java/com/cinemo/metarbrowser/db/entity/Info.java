@@ -40,7 +40,7 @@ public class Info {
     @ColumnInfo(name = "raw")
     private String raw;
 
-    @Ignore
+    @ColumnInfo(name = "isExpanded")
     public boolean isExpanded = false;
 
     public String getId() {

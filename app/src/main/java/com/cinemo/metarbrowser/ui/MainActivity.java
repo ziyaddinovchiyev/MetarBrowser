@@ -3,6 +3,7 @@ package com.cinemo.metarbrowser.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         infoList.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InfoListAdapter(this);
         infoList.setAdapter(adapter);
+        ((SimpleItemAnimator) infoList.getItemAnimator()).setSupportsChangeAnimations(false);
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
